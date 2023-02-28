@@ -12,14 +12,21 @@ type MyTheme struct {
 	Theme string
 }
 
+//go:embed Icon.png
+var Ico []byte
+var Icon = &fyne.StaticResource{
+	StaticName:    "Icon.png",
+	StaticContent: Ico,
+}
+
 /*
 Font to be used in app
 */
 //go:embed OpenSans-Regular.ttf
-var Font []byte //(looking for better fonts...)
+var font []byte //(looking for better fonts...)
 var MyFont = &fyne.StaticResource{
 	StaticName:    "OpenSans-Regular.ttf",
-	StaticContent: Font,
+	StaticContent: font,
 }
 
 /*
@@ -71,20 +78,12 @@ func (m *MyTheme) Color(n fyne.ThemeColorName, v fyne.ThemeVariant) color.Color 
 		return color.Transparent
 
 	case theme.ColorNamePrimary:
-		//if v == theme.VariantDark {
 		return theme.WarningColor()
-		//}
 
 	case theme.ColorNameForeground:
-		return color.RGBA{R: 30, G: 30, B: 30, A: 255}
-
-	case theme.ColorNameBackground:
-		if v == theme.VariantDark {
-			return color.RGBA{R: 255, G: 255, B: 255, A: 155}
+		if v == theme.VariantLight {
+			return color.RGBA{R: 30, G: 30, B: 30, A: 255}
 		}
-
-	case theme.ColorNameShadow:
-		return color.Transparent
 
 	case theme.ColorNameInputBackground:
 		return color.Transparent

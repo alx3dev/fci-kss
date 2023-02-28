@@ -1,6 +1,8 @@
 package kss
 
 import (
+	theme2 "kss/theme"
+
 	"image/color"
 	"os"
 	"path/filepath"
@@ -84,8 +86,9 @@ func (k *Kss) screenMain() fyne.CanvasObject {
 
 	// Top form label.
 	// (4)-edit to suit your needs.
-	mainLabel := widget.NewLabel("HIP-ELBOW DYSPLASIA - INTERNATIONAL CERTIFICATE")
-	mainLabel.Alignment = fyne.TextAlignCenter
+	mainLabel := widget.NewButtonWithIcon("HIP-ELBOW DYSPLASIA - INTERNATIONAL CERTIFICATE", theme2.Icon, func() {})
+	mainLabel.Alignment = widget.ButtonAlignCenter
+	mainLabel.IconPlacement = widget.ButtonIconTrailingText
 
 	// Create a top form with our entries.
 	// (1c)-edit to be same as (1)
@@ -117,7 +120,8 @@ func (k *Kss) screenMain() fyne.CanvasObject {
 	// Put forms and labels in a container,
 	// with selectable widgets between them.
 	// (7)-edit to suit your needs.
-	form := container.NewVBox(mainLabel,
+	form := container.NewVBox(
+		mainLabel,
 		formDog,
 		widget.NewSeparator(), widget.NewSeparator(),
 		container.NewAdaptiveGrid(2, hipSelect, elbowSelect),

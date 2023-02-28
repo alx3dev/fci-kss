@@ -83,7 +83,6 @@ func ExportPNG(name string, img image.Image) {
 	if err != nil {
 		fyne.LogError("encoding image went wront", err)
 	}
-
 }
 
 // Save fyne resource context to hard drive,
