@@ -35,7 +35,7 @@ func RoundedRectangle(radius, stroke float32, bgClr, strokeClr color.Color) (*fy
 	bg.StrokeColor = strokeClr
 
 	anim := canvas.NewColorRGBAAnimation(
-		color.Transparent, bgClr, time.Millisecond*1250, func(c color.Color) {
+		color.Transparent, bgClr, time.Millisecond*500, func(c color.Color) {
 			bg.FillColor = c
 			canvas.Refresh(bg)
 		})
@@ -60,6 +60,22 @@ func RoundedButton(txt string, align fyne.TextAlign, radius, stroke float32, bgC
 		callback()
 	}
 	return c
+}
+
+func MovingAnimation(obj fyne.CanvasObject, startPos, endPos fyne.Position, mlSec float32) fyne.CanvasObject {
+	var anim *fyne.Animation
+
+	duration := time.Millisecond * time.Duration(mlSec)
+
+	anim = canvas.NewPositionAnimation(startPos, endPos, duration, func(pos fyne.Position) {
+		obj.Move(pos)
+		obj.Refresh()
+	})
+	anim.AutoReverse = true
+	anim.Start()
+
+	return obj
+
 }
 
 //
